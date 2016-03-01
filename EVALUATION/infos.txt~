@@ -1,0 +1,36 @@
+13/07 20:50 : REF
+LAIequiv :2.5
+thinning : 25% of N de  init
+
+13/07 21:00
+/ref
+thinning :0.65 *N
+
+--> equilibre mieux les flux en cours de rotation
+
+13/07 21:09
+/ref
+CO2 = 380
+
+--> l'effet CO2 explique le maintient, voir l'augmentation des flux.
+--> cet effet est plus retranscrit par l'approche Farquhar que par l'approche LUE
+
+
+14/07 22:20
+FOREVER soil type 0 (RU=20 mm)
+--> OK repond correctement
+
+14/07 22:36
+FOREVER soil type 2 
+--> OK repond correctement
+
+
+15/07 10:43
+with :
+- harvest dendrometric dimensions
+- reparametrisation odf initial soil BIO and RPM
+
+15/07 15H56 :  REF2
+version PP25.0.0
+
+
