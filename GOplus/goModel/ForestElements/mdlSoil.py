@@ -10,7 +10,7 @@ class Soil(ELT):
     '''
 
     # Outer elements
-    locTime = eltOut('LocTime element')
+    sunTime = eltOut('SunTime element')
     microclim = eltOut('MicroClimate upper soil')
     forest = eltOut('Forest container element')
     treeStand = eltOut('TreesStand element')
@@ -23,16 +23,16 @@ class Soil(ELT):
 
     def update(self):
         #Bound sub elements
-        if self.locTime.isSimulBeginning:
+        if self.sunTime.isSimulBeginning:
             self.surface.microclim = self.microclim
             
-            self.carbonCycle.locTime= self.locTime
+            self.carbonCycle.sunTime= self.sunTime
             self.carbonCycle.microclim = self.microclim
             self.carbonCycle.treeStand = self.treeStand
             self.carbonCycle.underStorey = self.underStorey
             self.carbonCycle.waterCycle = self.waterCycle
             
-            self.waterCycle.locTime= self.locTime
+            self.waterCycle.sunTime= self.sunTime
             self.waterCycle.treeStand = self.treeStand
             self.waterCycle.underStorey = self.underStorey
             self.waterCycle.surface = self.surface

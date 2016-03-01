@@ -8,7 +8,7 @@ class SoilCarbonCycle(ELT):
     '''
 
     # Outer elements
-    locTime = eltOut('LocTime element')
+    sunTime = eltOut('SunTime element')
     microclim = eltOut('MicroClimate upper soil')
     treeStand = eltOut('TreesStand element')
     underStorey = eltOut('UnderStorey element')
@@ -65,7 +65,7 @@ class SoilCarbonCycle(ELT):
         ):
         
         #Daily reevalution of soil carbon compartments
-        if self.locTime.isDayEnd : 
+        if self.sunTime.isDayEnd : 
             
             _dage = 1.0 / 365.25
             

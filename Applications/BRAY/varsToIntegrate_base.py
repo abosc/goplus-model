@@ -1,7 +1,7 @@
 #Mean,  Sum, Max,  Min,  Last, SumWatt , SumDay
 
 varsToIntegrate = '''
-Last: mdl.locTime.Y
+Last: mdl.sunTime.Y
 Mean: mdl.climate.microclim.RsDif
 Mean: mdl.climate.microclim.RsDir
 Mean: mdl.climate.microclim.RsUp

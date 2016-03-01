@@ -46,8 +46,7 @@ class UnderStorey(ELT):
     '''Represent the under growth vegetation layer (typicaly  Molinea coerulea)'''
 
     #Outer elements
-    locTime = eltOut('LocTime element')
-    sunLocal =eltOut('SunLocal element')
+    sunTime = eltOut('SunTime element')
     microclim = eltOut('Upper MicroClimate element')
     microclim_under =eltOut('Under MicroClimate element')
     soil = eltOut('Soil element')
@@ -56,7 +55,7 @@ class UnderStorey(ELT):
     @eltIn
     class foliage(ugCompartment):
         k_MortalitySMD = param('Mortality SMD  threshold', 0.84)
-    
+
     @eltIn
     class roots(ugCompartment):
         AboveGroundFraction = param('fraction of the compartment biomass above ground',  0)
@@ -66,7 +65,7 @@ class UnderStorey(ELT):
 
     @eltIn
     class perennial(ugCompartment):
-        W = var('dry biomass (Kg_DM /m2_soil)', 0.1) 
+        W = var('dry biomass (Kg_DM /m2_soil)', 0.1)
         AboveGroundFraction = param('fraction of the compartment biomass above ground',  0.15)
         GrowthMax = param('Maximal annual biomass production (Kg_DM /annual_growth_cycle)', 0.4)
         k_MortalityTemp = param('Mortality temperature threshold (deg_C)', -8)
@@ -75,39 +74,39 @@ class UnderStorey(ELT):
         k_MortalitySMDRate = param('SMD mortality rate (Kg_DM /Kg_DM /day)', 0.003)
         k_MortalityDOY = param('DOY threshold [1-365]', 0)
         k_MortalityDOYRate = param('DOY mortality rate (Kg_DM /Kg_DM /day)', 0.001)
-        Cpool = var('non structural carbohydrate pool (g_C /m2_soil)', 50) 
+        Cpool = var('non structural carbohydrate pool (g_C /m2_soil)', 50)
 
     @eltIn
     class canopy(Canopy):
-        
-        pcs_StomatalConductance = pcs(Canopy.pcs_StomatalConductance, 
-            g_stom_Max = param('maximal stomatal conductance (m/s)', 0.0062 * 2), 
-            k_Rsabs_P50 = param('Leaf solar radiation absorded for 50%  of stomatal conductance ponderation (W /m2_LAI)', 69.94) , #TODO : change value to be consistent with previous 
-            k_Rsabs_Curv = param('Curvature parameter of radiative ponderation of stomatal conductance (-)', 1.13), #TODO : change value to be consistent with previous 
-            k_VPD_P100 = param('VPD that start to close stomata (Pa)', 728), #TODO : change value to be consistent with previous 
-            k_VPD_Curv = param('Curvature parameter of VPD ponderation of stomatal conductance (-)',1.08), #TODO : change value to be consistent with previous 
-            k_Yleaf_P0 = param('parameter 1 of leaf water potential ponderation of stomatal conductance (MPa)',-2.0), 
-            k_Yleaf_Curv = param('parameter 2 of leaf water potential ponderation of stomatal conductance (-)',0.5), 
-            k_time_P50 = param('ponderation of time response to stationnary state of stomatal conductance ]0-1]', 0.8), 
+
+        pcs_StomatalConductance = pcs(Canopy.pcs_StomatalConductance,
+            g_stom_Max = param('maximal stomatal conductance (m/s)', 0.0062 * 2),
+            k_Rsabs_P50 = param('Leaf solar radiation absorded for 50%  of stomatal conductance ponderation (W /m2_LAI)', 69.94) , #TODO : change value to be consistent with previous
+            k_Rsabs_Curv = param('Curvature parameter of radiative ponderation of stomatal conductance (-)', 1.13), #TODO : change value to be consistent with previous
+            k_VPD_P100 = param('VPD that start to close stomata (Pa)', 728), #TODO : change value to be consistent with previous
+            k_VPD_Curv = param('Curvature parameter of VPD ponderation of stomatal conductance (-)',1.08), #TODO : change value to be consistent with previous
+            k_Yleaf_P0 = param('parameter 1 of leaf water potential ponderation of stomatal conductance (MPa)',-2.0),
+            k_Yleaf_Curv = param('parameter 2 of leaf water potential ponderation of stomatal conductance (-)',0.5),
+            k_time_P50 = param('ponderation of time response to stationnary state of stomatal conductance ]0-1]', 0.8),
             )
-    
-        pcs_ShortWaveBalance = pcs(Canopy.pcs_ShortWaveBalance, 
-            rho_l = param('Leaf reflection coefficient for shortwave (_)', 0.15), 
-            theta_l  = param('Leaf transmissivity for shortwave (_)', 0.02), 
+
+        pcs_ShortWaveBalance = pcs(Canopy.pcs_ShortWaveBalance,
+            rho_l = param('Leaf reflection coefficient for shortwave (_)', 0.15),
+            theta_l  = param('Leaf transmissivity for shortwave (_)', 0.02),
             )
-    
-        pcs_EnergyBalance = pcs(Canopy.pcs_EnergyBalance, 
-            kLAI1_Rth_Int = param('parameter 1 of longwave radiation interception (-)',  -0.538), 
-            kLAI2_Rth_Int = param('parameter 2 of longwave radiation interception (-)', 0.0177), 
-            Emissivity = param('emissivity', 0.98), 
+
+        pcs_EnergyBalance = pcs(Canopy.pcs_EnergyBalance,
+            kLAI1_Rth_Int = param('parameter 1 of longwave radiation interception (-)',  -0.538),
+            kLAI2_Rth_Int = param('parameter 2 of longwave radiation interception (-)', 0.0177),
+            Emissivity = param('emissivity', 0.98),
             )
-            
-        pcs_CanopyRainInterception = pcs(Canopy.pcs_CanopyRainInterception, 
-            kRainInt_LAI = param('parameter of rain interception by leaf (-)',  -0.33), 
-            SurfaceWaterStorageCapacity = param('water storage capacity by leaf area index(Kg_H2O /m2_leafAreaIndex)', 0.125 * 2), 
+
+        pcs_CanopyRainInterception = pcs(Canopy.pcs_CanopyRainInterception,
+            kRainInt_LAI = param('parameter of rain interception by leaf (-)',  -0.33),
+            SurfaceWaterStorageCapacity = param('water storage capacity by leaf area index(Kg_H2O /m2_leafAreaIndex)', 0.125 * 2),
             )
-            
-        pcs_AssimilationFarquhar = pcs(Canopy.pcs_AssimilationFarquhar, 
+
+        pcs_AssimilationFarquhar = pcs(Canopy.pcs_AssimilationFarquhar,
             Vcmax_25 = param('Vcmax at TCref, expressed on a one-sided leaf area basis (mol_CO2 /m2_leaf /s))',  40.9e-6),   #Delzon 2000 [p 18] (mean of all stages and two traitements)
             Ea_Vcmax = param('Activation energy for Vcmax (J /mol)', 58750.),  #Delzon 2000 [p j]
             Jmax_25 = param('Jmax at TCref, expressed on a one-sided leaf area basis (mol_e /m2_leaf /s', 54.6e-6),#Delzon 2000 [p 18] (mean of all stages and two traitements)
@@ -122,24 +121,23 @@ class UnderStorey(ELT):
         '''hourly update
         '''
         #SIMULATION INITIALISATIONS
-        if self.locTime.isSimulBeginning:
-            #connect the inner ELT 
-            self.canopy.locTime = self.locTime
-            self.canopy.sunLocal = self.sunLocal
+        if self.sunTime.isSimulBeginning:
+            #connect the inner ELT
+            self.canopy.sunTime = self.sunTime
             self.canopy.microclim = self.microclim
             self.canopy.microclim_under = self.microclim_under
             self.canopy.soil = self.soil
-        
+
             self.pcs_AllometricDimensions()
 
         #Canopy processes
         self.canopy.update()
-        
+
         #Water balance processes
         self.pcs_HydraulicStatus()
         self.pcs_Respiration()
 
-        #plantdevelopment 
+        #plantdevelopment
         self.pcs_Phenology()
         self.pcs_Growth()
         self.pcs_AllometricDimensions()
@@ -149,16 +147,16 @@ class UnderStorey(ELT):
     #DIMENSIONS ALLOMETRICALY LINKED TO COMPARTMENT BIOMASS
     #vars
     HEIGHTmean   = var('height (m)')
-    density = private('plant per hectare (plant /ha)', 3000.)
-    
-    @pcs    
-    def pcs_AllometricDimensions(self, 
-        SLA = param('specific leaf area (m2_LAI /Kg_DM)', 20), 
-        Height_max = param('maximal height (m)', 0.8), 
-        kAerialWeight_Height = param('allometric coefficient of relation between aerial weight and height', 5.), 
+    density = privar('plant per hectare (plant /ha)', 3000.)
+
+    @pcs
+    def pcs_AllometricDimensions(self,
+        SLA = param('specific leaf area (m2_LAI /Kg_DM)', 20),
+        Height_max = param('maximal height (m)', 0.8),
+        kAerialWeight_Height = param('allometric coefficient of relation between aerial weight and height', 5.),
         ):
         '''Evaluate dimensions  allometricaly linked to compartment biomass'''
-        
+
         #LAI  (m2_LAI /m2_soil)
         self.canopy.LAI = SLA * self.foliage.W
 
@@ -167,9 +165,9 @@ class UnderStorey(ELT):
         self.HEIGHTmean = Height_max * (1 - exp(- kAerialWeight_Height * self.foliage.W ))
 
         #density : Be carreful , it's just an order value used for aerodynamic dimension evaluation
-        self.density= 1500*self.canopy.LAI 
+        self.density= 1500*self.canopy.LAI
 
-    
+
     @pcs
     def pcs_HydraulicStatus(self):
         '''leaf water potential estimate by a simple RC model.
@@ -178,7 +176,7 @@ class UnderStorey(ELT):
         '''
         _canopy = self.canopy
         _soilWaterPotential = self.soil.waterCycle.RootLayerWaterPotential
-        
+
         if _canopy.LAI>0.0001:
 
             #soil leaf hydraulic resistance (MPa m2_leaf s kg_H2O-1)
@@ -200,8 +198,8 @@ class UnderStorey(ELT):
     Rg = var('growth respiration (g_C /m2_soil /hour)')
     R_AboveGround = var('aboveground part of respiration  (g_C /m2_soil /hour)')
     R_UnderGround = var('underground part of respiration (g_C /m2_soil /hour)')
-    
-    @pcs    
+
+    @pcs
     def pcs_Respiration(self):
         '''Respiratory carbon fluxes.
             - the model is based on the classical partitionning of respiration between maintenance and growth components
@@ -209,7 +207,7 @@ class UnderStorey(ELT):
             - distribute on AboveGround and Underground composantes
             - decrease carbon pool
         '''
-        
+
         #initialisation
         (self.Rm, self.Rg,  self.R_AboveGround,  self.R_UnderGround) = (0, 0, 0, 0)
 
@@ -233,34 +231,31 @@ class UnderStorey(ELT):
 
 
     #PHENOLOGY
-    @pcs    
-    def pcs_Phenology(self, 
-        _HeatSum = private('temperature sum from year beginning (deg day)', ELT), 
-        ):
+    @pcs
+    def pcs_Phenology(self):
         ''' For eah compartment, determine when cumulative temperature reach the  level to start growth
         '''
 
         #update the heat sums used for phenology outbreak
-        if self.locTime.isYearBeginning:
-            _HeatSum.air = 0
-            _HeatSum.soil = 0
+        if self.sunTime.isYearBeginning:
+            self._HeatSum_air = 0
+            self._HeatSum_soil = 0
             for _cpt in (self.foliage, self.roots,  self.perennial):
                 _cpt.GrowthStart = 9999
-        
-        _HeatSum.air  += self.microclim.TaC / 24.0
-        _HeatSum.soil += self.soil.carbonCycle.Ts_resp / 24.0
-        
-        #daily test phenology start
-        if self.locTime.isDayEnd:
-            for (_cpt, _HeatSum) in ((self.foliage, _HeatSum.air), (self.roots, _HeatSum.soil), (self.perennial, _HeatSum.air)):
-                if _HeatSum >= _cpt.HeatSum_GrowthStart and _cpt.GrowthStart > self.locTime.DOY :
-                    _cpt.GrowthStart = self.locTime.DOY
 
-    
+        self._HeatSum_air  += self.microclim.TaC / 24.0
+        self._HeatSum_soil += self.soil.carbonCycle.Ts_resp / 24.0
+
+        #daily test phenology start
+        if self.sunTime.isDayEnd:
+            for (_cpt, _HeatSum) in ((self.foliage, self._HeatSum_air), (self.roots, self._HeatSum_soil), (self.perennial, self._HeatSum_air)):
+                if _HeatSum >= _cpt.HeatSum_GrowthStart and _cpt.GrowthStart > self.sunTime.DOY :
+                    _cpt.GrowthStart = self.sunTime.DOY
+
+
     @pcs
-    def pcs_Growth(self, 
-        k_Alloc_P = param('Allocation rate to perennial [0-1]', 0.05), 
-        _Daily    = private('daily variables', ELT), 
+    def pcs_Growth(self,
+        k_Alloc_P = param('Allocation rate to perennial [0-1]', 0.05),
         ):
         ''' For eah compartment, determine growth components:
             - GPP allocation to carbon pool, use of it for
@@ -270,20 +265,20 @@ class UnderStorey(ELT):
         '''
 
         #Each year add inconditionnality a very little  quantity in Cpool to mimic natural seeding
-        if self.locTime.isYearBeginning:
+        if self.sunTime.isYearBeginning:
             for _cpt in (self.foliage, self.roots,  self.perennial):
                 _cpt.Cpool +=0.5
-        
-        #construct daily variables 
-        if self.locTime.isDayBeginning:
-            _Daily.GPP = 0
-            _Daily.Tmin = 9999
-        
-        _Daily.GPP += self.canopy.Assimilation
-        _Daily.Tmin = min(_Daily.Tmin, self.microclim.TaC)
-        
+
+        #construct daily variables
+        if self.sunTime.isDayBeginning:
+            self._Daily_GPP = 0
+            self._Daily_Tmin = 9999
+
+        self._Daily_GPP += self.canopy.Assimilation
+        self._Daily_Tmin = min(self._Daily_Tmin, self.microclim.TaC)
+
         #daily development
-        if self.locTime.isDayEnd:
+        if self.sunTime.isDayEnd:
             _RedistributedCpool = 0.0
             for _cpt in (self.foliage, self.roots, self.perennial):
                  _RedistributedCpool +=_cpt.Cpool
@@ -304,7 +299,7 @@ class UnderStorey(ELT):
 
                 #tissue production (in function of soil water limitation)
                 if self.soil.waterCycle.MoistureDeficit < _cpt.SMD_Limiting_growth :
-                    _dS = dSigmoide(self.locTime.DOY, _cpt.GrowthLength, _cpt.GrowthStart, 0.001)
+                    _dS = dSigmoide(self.sunTime.DOY, _cpt.GrowthLength, _cpt.GrowthStart, 0.001)
                     _cpt.Growth= max(
                                                     0,
                                                     min(
@@ -317,9 +312,9 @@ class UnderStorey(ELT):
 
                 #mortality  (Kg_DM /m2_soil /day) : effect of low temperature, high SMD and senescence
                 _cpt.LitterFall = _cpt.W *max (
-                                                            _cpt.k_MortalityTempRate if (_Daily.Tmin <= _cpt.k_MortalityTemp) else 0,
+                                                            _cpt.k_MortalityTempRate if (self._Daily_Tmin <= _cpt.k_MortalityTemp) else 0,
                                                             _cpt.k_MortalitySMDRate if  (self.soil.waterCycle.MoistureDeficit >= _cpt.k_MortalitySMD) else 0,
-                                                            _cpt.k_MortalityDOYRate if  (self.locTime.DOY >= _cpt.k_MortalityDOY) else 0,
+                                                            _cpt.k_MortalityDOYRate if  (self.sunTime.DOY >= _cpt.k_MortalityDOY) else 0,
                                                             _MortalityCpool
                                                                 )
 
@@ -327,13 +322,13 @@ class UnderStorey(ELT):
                 _cpt.W += _cpt.Growth - _cpt.LitterFall
 
                 #New carbon pool
-                _cpt.Cpool +=  _Alloc *( _Daily.GPP + _RedistributedCpool) - _cpt.Growth * _cpt.CarbonFraction * 1000
+                _cpt.Cpool +=  _Alloc *( self._Daily_GPP + _RedistributedCpool) - _cpt.Growth * _cpt.CarbonFraction * 1000
 
-    
+
     @pcs
     def pcs_AllocateLitterCarbonToSoil(self):
         '''Add compartment litter to soil carbon incoming'''
-        
-        if self.locTime.isDayEnd:
+
+        if self.sunTime.isDayEnd:
             for _cpt in (self.foliage,  self.roots,  self.perennial):
                 self.soil.carbonCycle.incorporateACarbonLitter(_cpt.LitterFall *1000*_cpt.CarbonFraction, _cpt.DPM_RPM_rate, _cpt.LitterFallAge)

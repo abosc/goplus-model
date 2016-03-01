@@ -9,11 +9,11 @@ class MicroClimate(ELT):
     z_ref =  var('height above soil of micro climate (m)', 30.)
 
     #radiative flux 
-    RsDif =  var('down diffuse solar radiation (W/m2)', 0)
-    RsDir =  var('down direct solar radiation (W/m2)', 0)
-    RsUp =  var('up solar radiation (W/m2)', 0)
-    RthDw =  var('down long wave radiation (W/m2)', 0)
-    RthUp =  var('up long wave radiation (W/m2)', 0)
+    RsDif =  var('down diffuse solar radiation (W /m2_soil)', 0)
+    RsDir =  var('down direct solar radiation (W /m2_soil)', 0)
+    RsUp =  var('up solar radiation (W /m2_soil)', 0)
+    RthDw =  var('down long wave radiation (W /m2_soil)', 0)
+    RthUp =  var('up long wave radiation (W /m2_soil)', 0)
     
     #input air properties
     TaC  = var('air temperature in degre celsius (degC)', 20)

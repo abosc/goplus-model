@@ -29,12 +29,12 @@ class Manager(mdlManager.Manager):
             - even-aged trees
             - 1 year of bare ground between 2 successive stands
         '''
-        if self.locTime.isYearEnd:
+        if self.sunTime.isYearEnd:
             if len(self.forest.treeStand)>0:
                 return self.forest.treeStand.Age +1
             else:
                 try:
-                    return self.locTime.Y - self.lastThinningYear
+                    return self.sunTime.Y - self.lastThinningYear
                 except:
                     return 0.0
         else:
@@ -45,7 +45,7 @@ class Manager(mdlManager.Manager):
 ##    def isEndYear(self, Y) :
 ##        ''' Return True if isYearEnd of Y.
 ##        '''
-##        if self.locTime.isYearEnd and self.locTime.Y == Y :
+##        if self.sunTime.isYearEnd and self.sunTime.Y == Y :
 ##            return True
 ##        else:
 ##            return False
@@ -97,7 +97,7 @@ class Manager(mdlManager.Manager):
                 harvestTaproot = False, 
                 harvestNeedles = False, 
                 )
-        self.lastThinningYear= self.locTime.Y
+        self.lastThinningYear= self.sunTime.Y
 
 
     def do_standard_thinning(self, nbTrees):
@@ -115,7 +115,7 @@ class Manager(mdlManager.Manager):
                 harvestTaproot = False, 
                 harvestNeedles = False, 
                 )
-        self.lastThinningYear= self.locTime.Y
+        self.lastThinningYear= self.sunTime.Y
 
 
     def do_aerial_biomass_thinning(self, nbTrees):
@@ -133,7 +133,7 @@ class Manager(mdlManager.Manager):
                 harvestTaproot = False, 
                 harvestNeedles = False, 
                 )
-        self.lastThinningYear= self.locTime.Y
+        self.lastThinningYear= self.sunTime.Y
 
 
     def do_intensive_biomass_thinning(self, nbTrees):
@@ -151,7 +151,7 @@ class Manager(mdlManager.Manager):
                 harvestTaproot = True, 
                 harvestNeedles = False, 
                 )
-        self.lastThinningYear= self.locTime.Y
+        self.lastThinningYear= self.sunTime.Y
 
     def do_all_woody_thinning(self, nbTrees):
         ''' Do a thinning operation to reduce the number of trees per unit area.
@@ -168,7 +168,7 @@ class Manager(mdlManager.Manager):
                 harvestTaproot = False, 
                 harvestNeedles = False, 
                 )
-        self.lastThinningYear= self.locTime.Y
+        self.lastThinningYear= self.sunTime.Y
         
     def do_all_biomass_thinning(self, nbTrees):
         ''' Do a thinning operation to reduce the number of trees per unit area.
@@ -185,7 +185,7 @@ class Manager(mdlManager.Manager):
                 harvestTaproot = False, 
                 harvestNeedles = True,
                 )
-        self.lastThinningYear= self.locTime.Y
+        self.lastThinningYear= self.sunTime.Y
 
 
     def do_install_stand(self, trees_Age, nbTreesHa):

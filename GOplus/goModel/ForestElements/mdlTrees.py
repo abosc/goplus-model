@@ -19,11 +19,3 @@ class Trees(ELTS):
             self.HEIGHTmean = sum(_tree.Height for _tree in self) / treesCount if treesCount>0 else 0
             self.HEIGHTsd = (sum((_tree.Height - self.HEIGHTmean)**2 for _tree in self) / treesCount)**0.5 if treesCount>0 else 0
 
-        def __delitem__(self, key):
-            ELTS.__delitem__(self, key)
-            self.update()
-        
-        def __setitem__(self, key, value):
-            ELTS.__delitem__self.update()
-        
-        

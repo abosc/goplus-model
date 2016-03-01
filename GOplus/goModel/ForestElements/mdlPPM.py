@@ -1,6 +1,5 @@
 from ..goBases import *
-from .mdlLocTime import LocTime
-from .mdlSunLocal import SunLocal
+from .mdlSunTime import SunTime
 from .mdlMicroClimate import MicroClimate
 
 
@@ -10,7 +9,7 @@ class CaterpillarsCohort(ELT):
     '''
     
     #Outer elements
-    locTime = eltOut('LocTime element', LocTime)
+    sunTime = eltOut('SunTime element', SunTime)
     microclim = eltOut('MicroClimate element', MicroClimate)
     treeStand = eltOut('TreeStand element', TreeStand)
 
@@ -56,10 +55,10 @@ class CaterpillarsCohort(ELT):
             self.individualActivity()
 
             #leaf area consumption
-            if self.locTime.isDayBeginning :  self.dailyDefoliation = 0
+            if self.sunTime.isDayBeginning :  self.dailyDefoliation = 0
             self.dailyDefoliation += self.feed * self.populationSize
             
-            if self.locTime.isDayEnd :  
+            if self.sunTime.isDayEnd :  
                 #TODO : apply the defoliation on treeStand
                 
                 self.dailyDefoliation = 0
@@ -93,8 +92,7 @@ class PPM_Cycle(ELT):
         A. Bosc - 2013-11-26
     '''
     #associated outer elements
-    locTime = eltOut('LocTime element',  LocTime)
-    sunLocal = eltOut('SunLocal element',  SunLocal)
+    sunTime = eltOut('SunTime element',  SunTime)
     microclim = eltOut('MicroClimate element',  MicroClimate)
     
     Tcycle = var('temperature for cycle phenology (deg_C)', 8.0)

@@ -15,8 +15,7 @@ class Forest(ELT):
     '''
     
     #Outer elements
-    locTime = eltOut('LocTime element')
-    sunLocal = eltOut('SunLocal element')
+    sunTime = eltOut('SunTime element')
     microclim  = eltOut('Upper forest MicroClimate')
 
     #Inner elements
@@ -30,20 +29,18 @@ class Forest(ELT):
         ''' decline the update over the Forest inner ELT in function of the moment caracteristics'''
         
         #connect the inner ELT of the Forest
-        if self.locTime.isSimulBeginning : 
-            self.treeStand.locTime = self.locTime
-            self.treeStand.sunLocal = self.sunLocal       
+        if self.sunTime.isSimulBeginning : 
+            self.treeStand.sunTime = self.sunTime
             self.treeStand.microclim = self.microclim       
             self.treeStand.microclim_under = self.microclim_UnderStorey
             self.treeStand.soil = self.soil
 
-            self.underStorey.locTime = self.locTime
-            self.underStorey.sunLocal = self.sunLocal
+            self.underStorey.sunTime = self.sunTime
             self.underStorey.microclim = self.microclim_UnderStorey
             self.underStorey.microclim_under = self.microclim_Soil
             self.underStorey.soil = self.soil
 
-            self.soil.locTime = self.locTime
+            self.soil.sunTime = self.sunTime
             self.soil.microclim = self.microclim_Soil
             self.soil.treeStand = self.treeStand
             self.soil.underStorey = self.underStorey
@@ -94,7 +91,7 @@ class Forest(ELT):
         _soil_CS = self.soil.surface
         _microclim = self.microclim
         
-        self.ETR = self.soil.surface.ETR + _underStorey_CS.ETR + _treeStand_CS.ETR
+        self.ETR = _soil_CS.ETR + _underStorey_CS.ETR + _treeStand_CS.ETR
         self.NEE = (self.treeStand.Rm +self.treeStand.Rg - _treeStand_CS.Assimilation )  \
                     + (self.underStorey.Rm + self.underStorey.Rg - _underStorey_CS.Assimilation ) \
                     + self.soil.carbonCycle.Rh

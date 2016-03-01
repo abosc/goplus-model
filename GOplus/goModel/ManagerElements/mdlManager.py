@@ -8,7 +8,7 @@ class Manager(ELT):
     '''
 
     # Outer  elements
-    locTime = eltOut('LocTime element')
+    sunTime = eltOut('SunTime element')
     forest = eltOut('Forest element')
 
     #group of inner elements
@@ -44,7 +44,7 @@ class Manager(ELT):
         self.harvest_HEIGHTmean = 0.
         self.harvest_HEIGHTsd = 0.
 
-        if self.locTime.isYearEnd:
+        if self.sunTime.isYearEnd:
             self.do_managment()
 
 
@@ -66,12 +66,12 @@ class Manager(ELT):
         random.seed(len(_sortedTrees))     
         
         #choose randomly tree until stopperTest ==True, add it to markedTrees
-        del self.markedTrees[:]
+        self.markedTrees.clear()
 
         _nbtreesObjective = densityObjective*_treeStand.Area/10000.
         while len(_sortedTrees)> _nbtreesObjective :
             _tree = _sortedTrees[int((random.random() ** randomFactor) * len(_sortedTrees))]
-            self.markedTrees +=  [ _tree]
+            self.markedTrees.add( _tree)
             _sortedTrees.remove(_tree)
 
 
